@@ -8,43 +8,52 @@ final List<String> question = [
   "qual é seu animal favorito?"
 ];
 
-class Quiz extends StatelessWidget {
+class ToRespondAppState extends State<Quiz> {
+  var toRespondSelected = 0;
+
+  void toRespond() {
+    setState(() {
+      toRespondSelected++;
+    });
+
+    print(toRespondSelected);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "Perguntas",
-            key: key,
           ),
         ),
         body: Column(
           children: <Widget>[
-            Text(question[0], key: key),
+            Text(question[toRespondSelected]),
             ElevatedButton(
-              onPressed: () => {},
-              child:
-                  const Text('Enabled Button', style: TextStyle(fontSize: 20)),
+              onPressed: toRespond,
+              child: const Text('Resposta um', style: TextStyle(fontSize: 20)),
             ),
             ElevatedButton(
-              onPressed: () => {},
+              onPressed: toRespond,
               child:
-                  const Text('Enabled Button', style: TextStyle(fontSize: 20)),
+                  const Text('Resposta dois', style: TextStyle(fontSize: 20)),
             ),
             ElevatedButton(
-              onPressed: () => {},
+              onPressed: toRespond,
               child:
-                  const Text('Enabled Button', style: TextStyle(fontSize: 20)),
-            ),
-            ElevatedButton(
-              onPressed: () => {},
-              child:
-                  const Text('Enabled Button', style: TextStyle(fontSize: 20)),
+                  const Text('Resposta trés', style: TextStyle(fontSize: 20)),
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+class Quiz extends StatefulWidget {
+  ToRespondAppState createState() {
+    return ToRespondAppState();
   }
 }
