@@ -33,9 +33,9 @@ class _ToRespondAppState extends State<Quiz> {
         body: Column(
           children: <Widget>[
             Question(question[_toRespondSelected]),
-            ResponseQuestion("Resposta um"),
-            ResponseQuestion("resposta dois"),
-            ResponseQuestion("resposta tres"),
+            ResponseQuestion("Resposta um", _toRespond),
+            ResponseQuestion("resposta dois", _toRespond),
+            ResponseQuestion("resposta tres", _toRespond),
           ],
         ),
       ),
