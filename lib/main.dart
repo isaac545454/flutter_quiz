@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() => runApp(new Quiz());
 
@@ -8,15 +9,15 @@ final List<String> question = [
   "qual é seu animal favorito?"
 ];
 
-class ToRespondAppState extends State<Quiz> {
-  var toRespondSelected = 0;
+class _ToRespondAppState extends State<Quiz> {
+  var _toRespondSelected = 0;
 
-  void toRespond() {
+  void _toRespond() {
     setState(() {
-      toRespondSelected++;
+      _toRespondSelected++;
     });
 
-    print(toRespondSelected);
+    print(_toRespondSelected);
   }
 
   @override
@@ -30,18 +31,18 @@ class ToRespondAppState extends State<Quiz> {
         ),
         body: Column(
           children: <Widget>[
-            Text(question[toRespondSelected]),
+            Question(question[_toRespondSelected]),
             ElevatedButton(
-              onPressed: toRespond,
+              onPressed: _toRespond,
               child: const Text('Resposta um', style: TextStyle(fontSize: 20)),
             ),
             ElevatedButton(
-              onPressed: toRespond,
+              onPressed: _toRespond,
               child:
                   const Text('Resposta dois', style: TextStyle(fontSize: 20)),
             ),
             ElevatedButton(
-              onPressed: toRespond,
+              onPressed: _toRespond,
               child:
                   const Text('Resposta trés', style: TextStyle(fontSize: 20)),
             ),
@@ -53,7 +54,9 @@ class ToRespondAppState extends State<Quiz> {
 }
 
 class Quiz extends StatefulWidget {
-  ToRespondAppState createState() {
-    return ToRespondAppState();
+  const Quiz({super.key});
+
+  _ToRespondAppState createState() {
+    return _ToRespondAppState();
   }
 }
