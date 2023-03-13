@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'question.dart';
+import 'button.dart';
 
 void main() => runApp(new Quiz());
 
@@ -32,20 +33,9 @@ class _ToRespondAppState extends State<Quiz> {
         body: Column(
           children: <Widget>[
             Question(question[_toRespondSelected]),
-            ElevatedButton(
-              onPressed: _toRespond,
-              child: const Text('Resposta um', style: TextStyle(fontSize: 20)),
-            ),
-            ElevatedButton(
-              onPressed: _toRespond,
-              child:
-                  const Text('Resposta dois', style: TextStyle(fontSize: 20)),
-            ),
-            ElevatedButton(
-              onPressed: _toRespond,
-              child:
-                  const Text('Resposta trés', style: TextStyle(fontSize: 20)),
-            ),
+            ResponseQuestion("Resposta um"),
+            ResponseQuestion("resposta dois"),
+            ResponseQuestion("resposta tres"),
           ],
         ),
       ),
