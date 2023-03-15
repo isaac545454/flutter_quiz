@@ -1,6 +1,3 @@
-import 'dart:ffi';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'question.dart';
 import 'button.dart';
@@ -11,35 +8,38 @@ class _ToRespondAppState extends State<Quiz> {
   var toRespondSelected = 0;
 
   void _toRespond() {
-    setState(() {
-      toRespondSelected++;
-    });
-    print(toRespondSelected);
+    if (newQuestion) {
+      setState(() {
+        toRespondSelected++;
+      });
+    }
+  }
+
+  final _question = const [
+    {
+      'text': 'qual é sua cor favorita?',
+      'res': ['vermelho', 'azul', 'preto', 'branco']
+    },
+    {
+      'text': 'qual é seu animal favorito?',
+      'res': ['cachorro', 'gato', 'coelho', 'passarinho']
+    },
+    {
+      'text': 'qual sua linguagem de programação favorita?',
+      'res': ['python', 'typescript', 'Dart', 'Rust']
+    }
+  ];
+
+  bool get newQuestion {
+    return toRespondSelected < _question.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    final question = [
-      {
-        'text': 'qual é sua cor favorita?',
-        'res': ['vermelho', 'azul', 'preto', 'branco']
-      },
-      {
-        'text': 'qual é seu animal favorito?',
-        'res': ['cachorro', 'gato', 'coelho', 'passarinho']
-      },
-      {
-        'text': 'qual sua linguagem de programação favorita?',
-        'res': ['python', 'typescript', 'Dart', 'Rust']
-      }
-    ];
-
-    List<Widget> resComponent = [];
-
-    for (String resIndex
-        in question[toRespondSelected]["res"] as List<String>) {
-      resComponent.add(ResponseQuestion(resIndex, _toRespond));
-    }
+    List<String> ListRes =
+        newQuestion ? _question[toRespondSelected]["res"] as List<String> : [];
+    List<Widget> resComponent =
+        ListRes.map((item) => ResponseQuestion(item, _toRespond)).toList();
 
     return MaterialApp(
       home: Scaffold(
@@ -48,12 +48,14 @@ class _ToRespondAppState extends State<Quiz> {
             'Perguntas',
           ),
         ),
-        body: Column(
-          children: <Widget>[
-            Question(question[toRespondSelected]["text"].toString()),
-            ...resComponent
-          ],
-        ),
+        body: newQuestion
+            ? Column(
+                children: <Widget>[
+                  Question(_question[toRespondSelected]["text"].toString()),
+                  ...resComponent
+                ],
+              )
+            : Text("aaaaaaaaaaaaaa"),
       ),
     );
   }
